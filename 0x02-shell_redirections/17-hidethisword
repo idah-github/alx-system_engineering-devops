@@ -1,2 +1,2 @@
 #!/bin/bash
-grep -iv "bit" /etc/passwd
+grep -i -v "bit" /etc/passwd
