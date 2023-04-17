@@ -1,0 +1,4 @@
+#!/bin/bash
+#create file 
+touch "Best School"
+echo "Best School" >> "Best School"
