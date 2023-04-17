@@ -1,3 +1,4 @@
 In the first example, we use cat to read the file and output it to standard output, which is piped into the standard input of fmt. fmt formats the text into neat paragraphs and outputs it to standard output, which is piped into the standard input of pr.
 pr splits the text neatly into pages and outputs it to standard output, which is piped into the standard input of lpr.
 lpr takes its standard input and sends it to the printer.
+lpr takes its standard input and sends it to the printer.
