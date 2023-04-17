@@ -1,2 +1,2 @@
 #!/bin/bash
-ls  -la | grep -c '/$'
+ls  -la | grep R *
