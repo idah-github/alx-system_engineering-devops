@@ -1,2 +1,2 @@
 #!/bin/bash
-set | printenv |declare -F
+echo "Local Variables:" && set && echo "Environment Variables:" && printenv && echo "Functions:" && declare -F
