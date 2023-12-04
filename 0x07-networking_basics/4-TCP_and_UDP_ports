@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+#using netstat listening and PID
+netstat -l -p
