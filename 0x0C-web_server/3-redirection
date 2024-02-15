@@ -1,4 +1,5 @@
-#!/bin/bash
+#!usr/bin/bash
+#install, configre and restart server
 
 # Update package index
 apt-get -y update
