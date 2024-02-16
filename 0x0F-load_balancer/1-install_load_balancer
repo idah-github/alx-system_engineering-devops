@@ -23,7 +23,7 @@ backend web_backend
 \tmode http
 \tbalance roundrobin
 \tserver 20344-web-01 100.25.201.110:80 check
-\tserver 20344-web-02 100.26.231.151:80 check" | sudo tee -a $FILE
+\tserver 20344-web-02 100.26.231.151:80 check" | sudo tee $FILE
 
 # Restart HAProxy service if configuration is updated
 sudo service haproxy reload
