@@ -1,10 +1,17 @@
 #!/usr/bin/env bash
 # Configured nginx server for custom header
+ngix_config() {
 sudo apt-get -y update
 sudo apt-get -y install nginx
 
 FILE=/etc/nginx/sites-available/default
 
-sudo sed -i "5i \\\tadd_header X-Served-By \$hostname;" $FILE
+#sudo sed -i "5i \\\tadd_header X-Served-By \$hostname;" $FILE
+sudo sed -i "s/# server_name localhost;/server_name localhost;\n\tadd_header X-Served-By \$(hostname);/" $FILE
 
+sudo ngix -t
 sudo service nginx restart
+}
+
+ssh ubuntu@100.25.201.110 "$(declare -f ngix_config); ngix_config"
+ssh ubuntu@100.26.231.151 "$(declare -f ngix_config); ngix_config"
