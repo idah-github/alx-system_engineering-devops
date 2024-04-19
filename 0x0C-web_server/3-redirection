@@ -1,10 +1,16 @@
 #!/usr/bin/env bash
-# Bash script to Install nginx web server
+# Install Nginx
+sudo apt-get -y install nginx
+echo "Hello World" | sudo tee /usr/share/nginx/html/index.html > /dev/null
 
-sudo apt-get update -y
-sudo apt-get install nginx -y
-echo 'Holberton School' | sudo tee /var/www/html/index.html
-sudo service nginx start
-rdt="location /redirect_me {\\nrewrite ^(.*)$ https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;\\n}"
-sudo sed -i "30i $rdt" /etc/nginx/sites-available/default
+REDIRECT_STRING="    location /redirect_me {\n        return 301 http://www.google.com;\n    }\n"
+
+if grep -q "location /redirect_me" /etc/nginx/sites-available/default; then
+    echo "Redirection rule already exists. Skipping insertion."
+else
+    sudo sed -i "/server {/a $REDIRECT_STRING" /etc/nginx/sites-available/default
+    echo "Redirection rule added."
+fi
+
 sudo service nginx restart
+

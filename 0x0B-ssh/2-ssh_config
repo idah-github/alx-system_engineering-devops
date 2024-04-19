@@ -1,4 +1,7 @@
-# ssh config file
-Host *
-      PasswordAuthentication no
-      IdentifyFile ~/.ssh/school
+# configure it to our needs so that you can
+# connect to a server without typing a password
+
+ForwardAgent yes
+RSAAuthentication no
+PasswordAuthentication no
+IdentityFile ~/.ssh/school
