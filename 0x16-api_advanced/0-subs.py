@@ -10,7 +10,7 @@ def number_of_subscribers(subreddit):
     queries the Reddit API and returns the number of subscribers
     """
 
-    user_agent = {'User-agent': 'makana'}
+    user_agent = {'User-agent': 'Guantaiidah'}
     sub = requests.get('http://www.reddit.com/r/{}/about.json'
                        .format(subreddit), headers=user_agent)
     try:

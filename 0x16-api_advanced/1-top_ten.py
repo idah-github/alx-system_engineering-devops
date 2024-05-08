@@ -10,7 +10,7 @@ def top_ten(subreddit):
     queries the Reddit API and prints the titles of
     the first 10 hot posts listed for a given subreddit.
     """
-    user_agent = {'User-agent': 'metrine'}
+    user_agent = {'User-agent': 'Guantaiidah'}
     sub = requests.get('http://www.reddit.com/r/{}/hot.json'
                        .format(subreddit), headers=user_agent)
 
