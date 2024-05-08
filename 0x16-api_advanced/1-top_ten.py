@@ -14,9 +14,16 @@ def top_ten(subreddit):
     }
     response = requests.get(url, headers=headers, params=params,
                             allow_redirects=False)
-    if response.status_code == 404:
-        print("None")
+    if response.status_code != 200:
+        print("Error: Request failed with status code {}".format(response.status_code))
         return
-    results = response.json().get("data")
-    [print(c.get("data").get("title")) for c in results.get("children")]
+    try:
+        results = response.json().get("data")
+        [print(c.get("data").get("title")) for c in results.get("children")]
+    except ValueError:
+        print("Error: Unable to parse JSON data")
+
+if __name__ == "__main__":
+    subreddit = input("Enter subreddit name: ")
+    top_ten(subreddit)
 
