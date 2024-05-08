@@ -5,24 +5,23 @@ displays top 10 hot posts
 import requests
 
 
-def top_ten(subreddit):
+def recurse(subreddit, hot_list=[], after=None):
     """
-    queries the Reddit API and prints the titles of
-    the first 10 hot posts listed for a given subreddit.
-    """
+     queries the Reddit API and returns a list containing the
+     titles of all hot articles for a given subreddit
+     """
     user_agent = {'User-agent': 'Guantaiidah'}
-    sub = requests.get('http://www.reddit.com/r/{}/hot.json'
-                       .format(subreddit), headers=user_agent)
+    sub = requests.get('http://www.reddit.com/r/{}/hot.json?after={}'
+                       .format(subreddit, after), headers=user_agent)
 
     try:
         sub = sub.json().get('data')
+        after = sub.get('after')
         sub = sub.get('children')
-        i = 0
         for obj in sub:
-            if i > 9:
-                break
-            print(obj['data'].get('title'))
-            i += 1
-
+            hot_list.append(obj['data'].get('title'))
+        if after is not None:
+            recurse(subreddit, hot_list, after)
+        return hot_list
     except Exception as e:
-        print('None')
+        return None
