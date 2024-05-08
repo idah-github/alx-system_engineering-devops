@@ -1,31 +1,28 @@
 #!/usr/bin/python3
-"""Function to query a list of all hot posts on a given Reddit subreddit."""
+'''
+displays top 10 hot posts
+'''
 import requests
 
 
-def recurse(subreddit, hot_list=[], after="", count=0):
-    """Returns a list of titles of all hot posts on a given subreddit."""
-    url = "https://www.reddit.com/r/{}/hot/.json".format(subreddit)
-    headers = {
-        "User-Agent": "linux:0x16.api.advanced:v1.0.0 (by /u/bdov_)"
-    }
-    params = {
-        "after": after,
-        "count": count,
-        "limit": 100
-    }
-    response = requests.get(url, headers=headers, params=params,
-                            allow_redirects=False)
-    if response.status_code == 404:
-        return None
+def top_ten(subreddit):
+    """
+    queries the Reddit API and prints the titles of
+    the first 10 hot posts listed for a given subreddit.
+    """
+    user_agent = {'User-agent': 'Guantaiidah'}
+    sub = requests.get('http://www.reddit.com/r/{}/hot.json'
+                       .format(subreddit), headers=user_agent)
 
-    results = response.json().get("data")
-    after = results.get("after")
-    count += results.get("dist")
-    for c in results.get("children"):
-        hot_list.append(c.get("data").get("title"))
+    try:
+        sub = sub.json().get('data')
+        sub = sub.get('children')
+        i = 0
+        for obj in sub:
+            if i > 9:
+                break
+            print(obj['data'].get('title'))
+            i += 1
 
-    if after is not None:
-        return recurse(subreddit, hot_list, after, count)
-    return hot_list
-
+    except Exception as e:
+        print('None')
